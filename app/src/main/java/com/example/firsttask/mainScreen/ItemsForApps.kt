@@ -1,10 +1,12 @@
 package com.example.firsttask.mainScreen
 
+import com.example.firsttask.mainScreen.ObjectsForDickList.Dick
 
-class ItemsForApps {
+    fun fillTheListOfDick() : ArrayList<Dick> {
 
-    fun getListOfItems (): ArrayList<String> {
-        /**    Is that construction correct?   */
-        return listOf(Items.valueOf(String()).name) as ArrayList<String>
+        var listOfDicks : MutableList<Dick> = ArrayList()
+        for (i in 0..100){
+            listOfDicks.add(Dick("Dick$i", "Pusy$i"))
+        }
+        return listOfDicks as ArrayList<Dick>
     }
-}

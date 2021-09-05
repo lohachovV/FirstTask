@@ -1,12 +1,15 @@
 package com.example.firsttask.mainScreen
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.R
+import com.example.firsttask.mainScreen.ObjectsForDickList.Dick
 
-class DickItemAdapter (private val dickHeaders : List<String>) : RecyclerView.Adapter<DickItemAdapter.DickHolder>{
+class DickItemAdapter (private val dickHeaders : List<Dick>) :
+    RecyclerView.Adapter<DickItemAdapter.DickHolder>() {
 
 
     class DickHolder (item: View) : RecyclerView.ViewHolder(item){
@@ -20,11 +23,14 @@ class DickItemAdapter (private val dickHeaders : List<String>) : RecyclerView.Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DickHolder {
-        TODO("Not yet implemented")
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.dick_item, parent, false)
+        return DickHolder(itemView)
     }
 
+    /** I can't understand how send the fields */
     override fun onBindViewHolder(holder: DickHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.headerOfDick?.text = dickHeaders[position.]
     }
 
     override fun getItemCount(): Int {
