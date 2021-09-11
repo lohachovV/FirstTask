@@ -31,6 +31,7 @@ class DickItemAdapter (private val dickHeaders : List<Dick>) :
     /** I can't understand how send the fields */
     override fun onBindViewHolder(holder: DickHolder, position: Int) {
         holder.headerOfDick?.text = dickHeaders[position].headerOfDick
+        holder.subtitleOfDick?.text = dickHeaders[position].subtitleOfDick
     }
 
     override fun getItemCount(): Int {
