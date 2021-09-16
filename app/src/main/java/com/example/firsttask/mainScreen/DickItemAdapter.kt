@@ -6,19 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.R
-import com.example.firsttask.mainScreen.ObjectsForDickList.Dick
+import com.example.firsttask.mainScreen.objectsForDickList.Dick
 
-class DickItemAdapter (private val dickHeaders : List<Dick>) :
+class DickItemAdapter(private val dickHeaders: List<Dick>) :
     RecyclerView.Adapter<DickItemAdapter.DickHolder>() {
 
+    class DickHolder(item: View) : RecyclerView.ViewHolder(item) {
+        private val headerOfDick: TextView = item.findViewById(R.id.HeaderOfDick)
+        private val subtitleOfDick: TextView = item.findViewById(R.id.SubtitleOfDick)
 
-    class DickHolder (item: View) : RecyclerView.ViewHolder(item){
-        var headerOfDick: TextView? = null
-        var subtitleOfDick: TextView? = null
-
-        init {
-            headerOfDick = item.findViewById(R.id.HeaderOfDick)
-            subtitleOfDick = item.findViewById(R.id.SubtitleOfDick)
+        fun onBind(headerOfDick: String, subtitleOfDick: String) {
+            this.headerOfDick.text = headerOfDick
+            this.subtitleOfDick.text = subtitleOfDick
         }
     }
 
@@ -29,8 +28,10 @@ class DickItemAdapter (private val dickHeaders : List<Dick>) :
     }
 
     override fun onBindViewHolder(holder: DickHolder, position: Int) {
-        holder.headerOfDick?.text = dickHeaders[position].headerOfDick
-        holder.subtitleOfDick?.text = dickHeaders[position].subtitleOfDick
+        holder.onBind(
+            dickHeaders[position].headerOfDick,
+            dickHeaders[position].subtitleOfDick
+        )
     }
 
     override fun getItemCount(): Int {
