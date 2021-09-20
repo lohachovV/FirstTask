@@ -15,6 +15,6 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = DickItemAdapter(ItemsForApp.getListOfDick())
+        recyclerView.adapter = DickItemAdapter(ItemsForApp.listOfDicks)
     }
 }
