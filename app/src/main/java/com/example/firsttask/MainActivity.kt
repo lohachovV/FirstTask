@@ -1,5 +1,6 @@
 package com.example.firsttask
 
+import android.graphics.Canvas
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.addItemDecoration()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = DickItemAdapter(ItemsForApp.listOfDicks)
+    }
+
+    class ItemDec: RecyclerView.ItemDecoration(){
+        override fun onDraw(c: Canvas, parent: RecyclerView) {
+            super.onDraw(c, parent)
+        }
     }
 }
