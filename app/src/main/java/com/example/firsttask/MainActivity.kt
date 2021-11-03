@@ -10,42 +10,62 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firsttask.mainScreen.DickItemAdapter
+import com.example.firsttask.mainScreen.objectsForDickList.Dick
+import com.example.firsttask.mainScreen.objectsForDickList.DicksObserver
 import com.example.firsttask.mainScreen.objectsForDickList.ItemsForApp
 
 class MainActivity : AppCompatActivity() {
+    lateinit var recyclerView: RecyclerView
+
+    private val dickObserver : DicksObserver = object : DicksObserver{
+        override fun onDicksLoaded(items: List<Dick>) {
+            recyclerView.adapter = DickItemAdapter(items)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.addItemDecoration(ItemDec(applicationContext))
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = DickItemAdapter(ItemsForApp.listOfDicks)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ItemsForApp.addDickObserver(dickObserver)
+        ItemsForApp.notifyObservers()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ItemsForApp.removeDickObserver(dickObserver)
     }
 
     class ItemDec (context: Context): RecyclerView.ItemDecoration(){
-        val paint = Paint().apply { color = ContextCompat.getColor(context, R.color.black) }
+        private val paint = Paint().apply { color = ContextCompat.getColor(context, R.color.black) }
         override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
             c.save()
             val itemsCount = parent.childCount
             for (index in 0 until itemsCount) {
                 val child = parent.getChildAt(index)
-//                c.drawLine(
-//                    child.left.toFloat(),
-//                    child.bottom.toFloat(),
-//                    child.right.toFloat(),
-//                    child.bottom.toFloat(),
-//                    paint
-//                    )
-                c.drawRect(Rect().apply {
-                    top = child.top
-                    bottom = child.bottom
-                    right = child.right
-                    left = child.left
-                }, paint.apply {
-                    style = Paint.Style.STROKE
-                })
+                c.drawLine(
+                    child.left.toFloat(),
+                    child.bottom.toFloat(),
+                    child.right.toFloat(),
+                    child.bottom.toFloat(),
+                    paint.apply {
+                        style = Paint.Style.STROKE
+                    }
+                    )
+//                c.drawRect(Rect().apply {
+//                    top = child.top
+//                    bottom = child.bottom
+//                    right = child.right
+//                    left = child.left
+//                }, paint.apply {
+//                    style = Paint.Style.STROKE
+//                })
             }
             c.restore()
         }
