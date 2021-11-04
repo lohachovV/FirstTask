@@ -19,7 +19,11 @@ class MainActivity : AppCompatActivity() {
 
     private val dickObserver : DicksObserver = object : DicksObserver{
         override fun onDicksLoaded(items: List<Dick>) {
-            recyclerView.adapter = DickItemAdapter(items)
+            recyclerView.adapter = DickItemAdapter(items).apply {
+                onC = {
+                    it
+                }
+            }
         }
     }
 
