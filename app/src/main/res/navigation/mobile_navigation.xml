@@ -11,12 +11,12 @@
 
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/edit_item_dest"-->
-<!--        android:name="com.example.firsttask.mainScreen.EditItemAdapter"-->
-<!--        tools:layout="@layout/activity_main" >-->
+    <fragment
+        android:id="@+id/edit_item_dest"
+        android:name="com.example.firsttask.mainScreen.EditItemAdapter"
+        tools:layout="@layout/activity_main" >
 
-<!--    </fragment>-->
+    </fragment>
 
 
 

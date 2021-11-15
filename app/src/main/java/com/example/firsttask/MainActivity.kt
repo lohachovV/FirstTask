@@ -19,10 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     private val dickObserver : DicksObserver = object : DicksObserver{
         override fun onDicksLoaded(items: List<Dick>) {
+            //TODO fill:
             recyclerView.adapter = DickItemAdapter(items).apply {
-                onC = {
-                    it
-                }
+
             }
         }
     }
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.dicksList_recyclerView)
         recyclerView.addItemDecoration(ItemDec(applicationContext))
         recyclerView.layoutManager = LinearLayoutManager(this)
     }

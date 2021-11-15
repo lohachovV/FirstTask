@@ -12,18 +12,15 @@ import com.example.firsttask.mainScreen.objectsForDickList.Dick
 class DickItemAdapter(private val dickHeaders: List<Dick>) :
     RecyclerView.Adapter<DickItemAdapter.DickHolder>() {
 
-    var onC: (Boolean)->Unit = {}
-
     class DickHolder(item: View) : RecyclerView.ViewHolder(item) {
         private val headerOfDick: TextView = item.findViewById(R.id.HeaderOfDick)
         private val subtitleOfDick: TextView = item.findViewById(R.id.SubtitleOfDick)
         private val buttonEdit: Button = item.findViewById(R.id.buttonEdit)
 
-        fun onBind(headerOfDick: String, subtitleOfDick: String, onEditClicked: (Boolean)->Unit) {
+        fun onBind(headerOfDick: String, subtitleOfDick: String) {
             this.headerOfDick.text = headerOfDick
             this.subtitleOfDick.text = subtitleOfDick
             this.buttonEdit.setOnClickListener {
-                onEditClicked.invoke(true)
             }
         }
     }
@@ -38,7 +35,6 @@ class DickItemAdapter(private val dickHeaders: List<Dick>) :
         holder.onBind(
             dickHeaders[position].headerOfDick,
             dickHeaders[position].subtitleOfDick,
-            onC
         )
     }
 
